@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual do Usuário</title>
+</head>
+
+<body data-bs-theme="dark">
+    <div class="container">
+
+        <h1 style="text-align: justify;">Alterações personalizadas nas regras</h1>
+
+        <p style="text-align: justify;">A seguir, você pode adaptar a lógica do placar diretamente
+        modificando a configuração JSON abaixo. Os tempos estão em milissegundos. Muitas
+        configurações (por exemplo, "osaekomi_wazari_time", "osaekomi_ippon_time",
+        "osaekomi_warn_unassigned", "count_wazaris_towards_ippon") podem ser definidas como
+        "null" (sem as aspas) para desativá-las.
+        </p>
+        
+
+        Adapte o JSON e clique em "Atualizar e Redefinir" para aplicar as alterações.
+
+        Para usar este placar em um torneio, proceda da seguinte forma:
+
+        <ul>
+            <li>Prepare um laptop e conecte-o a um segundo monitor (ou projetor).</li>
+            <li>Baixe o código-fonte da página da web scoreboard.zip de <a
+                    href="https://github.com/dfltjack/scoreboard.git">a
+                    última versão no GitHub</a>.</li>
+            <li>Extraia o zip para qualquer diretório.</li>
+            <li>Abra o arquivo extraído index.html.</li>
+            <li>Abra uma nova aba somente de visualização clicando no ícone de olho.</li>
+            <li>Mova a aba aberta para o segundo monitor.</li>
+            <li>Clique na aba movida e pressione F11 para deixar a página em tela cheia.</li>
+            <li>Mova o mouse de volta para a aba original e use o placar
+                a partir daí. A maioria dos botões também pode ser acionada pelo teclado
+                atalhos, que são anotados como informações de hover nos respectivos
+                botões. Recomendamos rotular o teclado usando adesivos, como
+                neste <a href="">exemplo</a>.
+            </li>
+        </ul>
+
+        Aqui está uma visão geral de todos os atalhos de teclado:
+
+        <h1 style="text-align: justify; font-weight: bold;" id="usage">Uso</h1>
+        <table class="table table-striped" style="border-collapse: collapse; width: 100%;">
+            <thead class="thead-light">
+                <tr style="border-bottom: 2px solid #ddd;">
+                    <th style="padding: 8px; text-align: left;">Ação</th>
+                    <th style="padding: 8px; text-align: left;">Atalho de teclado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="border-bottom: 1px solid #ddd;">
+                    <td style="padding: 8px;">Hajime</td>
+                    <td style="padding: 8px;">Espaço (também redefine Osaekomi)</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #ddd;">
+                    <td style="padding: 8px;">Mate</td>
+                    <td style="padding: 8px;">Espaço</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #ddd;">
+                    <td style="padding: 8px;">Osaekomi</td>
+                    <td style="padding: 8px;">W, atribuir com A ou D</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #ddd;">
+                    <td style="padding: 8px;">Toketa</td>
+                    <td style="padding: 8px;">W, opcionalmente redefinir tempo com S</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #ddd;">
+                    <td style="padding: 8px;">Ippon</td>
+                    <td style="padding: 8px;">1 (branco) ou 5 (azul)</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #ddd;">
+                    <td style="padding: 8px;">Wazari</td>
+                    <td style="padding: 8px;">2 (branco) ou 6 (azul)</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #ddd;">
+                    <td style="padding: 8px;">Yuko</td>
+                    <td style="padding: 8px;">3 (branco) ou 7 (azul)</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #ddd;">
+                    <td style="padding: 8px;">Shido</td>
+                    <td style="padding: 8px;">4 (branco) ou 8 (azul)</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #ddd;">
+                    <td style="padding: 8px;">Remover Pontuação</td>
+                    <td style="padding: 8px;">Shift + numero da pontuação ou Ctrl + numero da pontuação </td>
+                </tr>
+                <tr style="border-bottom: 1px solid #ddd;">
+                    <td style="padding: 8px;">Próxima luta (redefinir placar)</td>
+                    <td style="padding: 8px;">Enter</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #ddd;">
+                    <td style="padding: 8px;">Alternar para pontuação de ouro</td>
+                    <td style="padding: 8px;">G</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #ddd;">
+                    <td style="padding: 8px;">Definir tempo de luta</td>
+                    <td style="padding: 8px;">Use o mouse</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #ddd;">
+                    <td style="padding: 8px;">Continuar (tanto a luta quanto Osaekomi). Útil após parar o tempo
+                        acidentalmente.</td>
+                    <td style="padding: 8px;">C</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>
+            Para adaptar o tamanho da fonte (para telas menores/maiores), basta aumentar ou diminuir o zoom (Google Chrome/Firefox:
+            Ctrl+Roda do Mouse). Se você quiser aumentar o zoom na página somente de visualização separadamente,
+            reconfigure o Firefox da seguinte forma:
+
+        <ul>
+            <li>Digite "about:config" na barra de endereços e pressione enter.</li>
+            <li>Se o Firefox perguntar, diga que você terá cuidado.</li>
+            <li>Procure a string "browser.zoom.siteSpecific". Se não existir, crie uma, é uma string booleana.</li>
+            <li>Defina como falso (Clique com o botão direito > "Alternar" ou clique em "Alternar").</li>
+        </ul>
+        </p>
+
+        <h1>Sobre</h1>
+
+        <p>Este software foi criado por Benjamin Bichsel do <a href="https://www.swiss-judo.ch/">Judo und Ju-Jitsu Club
+                Frauenfeld</a>.</p>
+        <P>Atualizado por Jackson Rodrigues de Andrade Porto para fins de aprendizado.</P>
+
+        <p>Este é um projeto gratuito e de código aberto licenciado sob a <a
+                href="https://www.gnu.org/licenses/agpl-3.0.en.html">Licença Pública Geral Affero GNU</a>. Como um
+            projeto de código aberto, este software
+            está disponível para qualquer pessoa usar, modificar e distribuir de acordo
+            com os termos da licença (resumo simplificado <a
+                href="https://www.tldrlegal.com/license/gnu-affero-general-public-license-v3-agpl-3-0">aqui</a>).</p>
+
+        <p>Este software foi construído usando vários recursos,
+            incluindo, mas não se limitando a:</p>
+        <ul class="list-group">
+            <li class="list-group-item">Ícones de <a href="https://fontawesome.com/">FontAwesome</a></li>
+            <li class="list-group-item">Áudio de <a href="https://freesound.org">Freesound</a> (Domínio Público)</li>
+            <li class="list-group-item">Estilos de <a href="https://getbootstrap.com/">Bootstrap</a> (licença MIT)</li>
+            <li class="list-group-item">Bandeira do Japão de <a
+                    href="https://en.wikipedia.org/wiki/Flag_of_Japan#/media/File:Flag_of_Japan.svg">Wikipedia</a>
+                (Domínio público)</li>
+            <li class="list-group-item">Inspiração de <a href="http://www.scorejudo.com">ScoreJudo</a> (mas esta página
+                da web não
+                compartilha nenhum código com ScoreJudo)</li>
+        </ul>
+    </div>
+
+    <link href="./css/bootstrap.css" rel="stylesheet">
+    <link href="./css/fontawesome.css" rel="stylesheet">
+    <link href="./css/solid.css" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet">
+
+    <script src="scripts/bootstrap.bundle.js"></script>
+    <script src="scripts/style.js"></script>
+    <script src="scripts/scoreboard.js"></script>
+
+</body>
+
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual do Usuário</title>
+</head>
+<body>
+    <div class="container">
+
+        <h2>Custom changes to rules</h2>
+
+        In the following, you can adapt the scoreboard logic directly by
+        modifying the below JSON configuration. Times are in milliseconds. Many
+        settings (e.g., "osaekomi_wazari_time", "osaekomi_ippon_time",
+        "osaekomi_warn_unassigned", "count_wazaris_towards_ippon") can be set to
+        "null" (without the quotation marks) to disable them.
+
+        Adapt the JSON and click "Update and Reset" to apply the changes.      
+
+        To use this scoreboard in a tournament, proceed as follows:
+
+        <ul>
+            <li>Prepare a laptop and connect it to a second monitor (or projector).</li>
+            <li>Download the webpage source scoreboard.zip from <a
+            href="https://github.com/bichselb/judo-scoreboard/releases/latest">the
+            latest GitHub release</a>.</li>
+            <li>Extract the zip to any directory.</li>
+            <li>Open the extracted file index.html.</li>
+            <li>Open a new view-only tab by clicking the eye icon.</li>
+            <li>Move the opened tab to the second monitor.</li>
+            <li>Click into the moved tab and press F11 to make the page full
+            screen.</li>
+            <li>Move the mouse back to the original tab and use the scoreboard
+            from there. Most buttons can also be triggered by keyboard
+            shortcuts, which are noted as hover information on the respective
+            buttons. We recommend labeling the keyboard using stickers, such as
+            in <a href="./images/stickers.jpeg">this example</a>.</li>
+        </ul>
+
+        Here is an overview over all keyboard shortcuts:        
+
+        <table class="table">            
+            <h2 id="usage">Usage</h2>
+            <thead class="thead-light">
+                <tr>
+                    <th>Action</th>
+                    <th>Keyboard shortcut</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Hajime</td>
+                    <td>Space (also resets Osaekomi)</td>
+                </tr>
+                <tr>
+                    <td>Mate</td>
+                    <td>Space</td>
+                </tr>
+                <tr>
+                    <td>Osaekomi</td>
+                    <td>W, assign with A or D</td>
+                </tr>
+                <tr>
+                    <td>Toketa</td>
+                    <td>W, optionally reset time with S</td>
+                </tr>
+                <tr>
+                    <td>Ippon</td>
+                    <td>1 (white) or 5 (blue)</td>
+                </tr>
+                <tr>
+                    <td>Wazari</td>
+                    <td>2 (white) or 6 (blue)</td>
+                </tr>
+                <tr>
+                    <td>Yuko</td>
+                    <td>3 (white) or 7 (blue)</td>
+                </tr>
+                <tr>
+                    <td>Shido</td>
+                    <td>4 (white) or 8 (blue)</td>
+                </tr>
+                <tr>
+                    <td>Next fight (reset scoreboard)</td>
+                    <td>Enter</td>
+                </tr>
+                <tr>
+                    <td>Switch to golden score</td>
+                    <td>Use mouse</td>
+                </tr>
+                <tr>
+                    <td>Set fight time</td>
+                    <td>Use mouse</td>
+                </tr>
+                <tr>
+                    <td>Continue (both the fight and Osaekomi). Useful after accidentally stopping the time.</td>
+                    <td>C</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>
+            To adapt the font size (for smaller/larger screens), simply zoom in or out (Firefox: Ctrl+MouseWheel). If you want to zoom the view-only page separately, reconfigure Firefox as follows:
+
+            <ul>
+                <li>Type "about:config" in your address bar and press enter.</li>
+                <li>If Firefox asks you, say you'll be careful.</li>
+                <li>Search the string "browser.zoom.siteSpecific". If it does not exist, create one, it's a boolean string.</li>
+                <li>Set it to false (Right click > "Toggle" or click on "Toggle").</li>
+            </ul>
+        </p>
+
+        <h2>About</h2>
+
+        <p>This software was created by Benjamin Bichsel from <a href="https://www.swiss-judo.ch/">Judo und Ju-Jitsu Club Frauenfeld</a>.</p>
+
+        <p>This is a free and open-source project licensed under the <a
+        href="https://www.gnu.org/licenses/agpl-3.0.en.html">GNU Affero General Public License</a>. As an open-source project, this software
+        is available for anyone to use, modify, and distribute in accordance
+        with the terms of the license (simplified summary <a
+        href="https://www.tldrlegal.com/license/gnu-affero-general-public-license-v3-agpl-3-0">here</a>).</p>
+
+        <p>This software was built using various resources,
+        including but not limited to:</p>
+        <ul class="list-group">
+          <li class="list-group-item">Icons from <a href="https://fontawesome.com/">FontAwesome</a></li>
+          <li class="list-group-item">Audio from <a href="https://freesound.org">Freesound</a> (Public Domain)</li>
+          <li class="list-group-item">Styles from <a href="https://getbootstrap.com/">Bootstrap</a> (MIT license)</li>
+          <li class="list-group-item">Japanese flag from <a href="https://en.wikipedia.org/wiki/Flag_of_Japan#/media/File:Flag_of_Japan.svg">Wikipedia</a> (Public domain)</li>
+          <li class="list-group-item">Inspiration from <a
+          href="http://www.scorejudo.com">ScoreJudo</a> (but this webpage does
+          not share any code with ScoreJudo)</li>
+        </ul>
+      </div>
+</body>
+</html> -->
