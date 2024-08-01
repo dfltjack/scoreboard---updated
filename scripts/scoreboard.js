@@ -41,6 +41,9 @@ var fight_rules = {
   stop_osaekomi_on_wazari: 2,
   stop_osaekomi_on_yuko: 100,
   count_wazaris_towards_ippon: 2,
+  count_shidos_towards_ippon: 3,
+  count_shidos_towards_wazaris: 2,
+  count_shidos_towards_yukos: 1,
   // sound
   osaekomi_error_sound_frequency_ms: 1000,
   error_sound_volume: 1,
@@ -199,27 +202,74 @@ function add_point(fighter, point_name) {
   const n_wazaris_before = fight_state.points[fighter]["wazari"];
   const n_yukos_before = fight_state.points[fighter]["yuko"];
   const n_shidos_before = fight_state.points[fighter]["shido"];
-
   
   console.log("Antes:", fight_state.points[fighter][point_name]);
-  if(fight_state.points === 0){
-    n_shidos_before = fight_state.points = 0;
-  }else{
+  
   fight_state.points[fighter][point_name] += 1;
-  }
+  
   console.log("Depois:", fight_state.points[fighter][point_name]);
 
+  convertShidoToYuko(fighter);
+  convertShidoToWazari(fighter);
+  convertShidoToIppon(fighter);
   convertWazariToIppon(fighter);
+  // convertYukoToWazari(fighter);
   convertYukoToIppon(fighter);
 
-  // 2 wazaris = 1 ippon
-  function convertWazariToIppon(fighter) {
-    if (fight_state.points[fighter]["wazari"] >= 2) {
-      fight_state.points[fighter]["wazari"] -= 2;
+  function convertShidoToIppon(fighter) {
+    if (fight_state.points[fighter]["shido"] === 3) {
+      fight_state.points[fighter]["shido"] === 3;
       fight_state.points[fighter]["ippon"]++;
     }
   }
-  // 100 yukos = 1 ippon
+
+  function convertShidoToWazari(fighter) {
+    if (fight_state.points[fighter]["shido"] >= 2) {
+      fight_state.points[fighter]["shido"] === 2;
+      fight_state.points[fighter]["wazari"]++;
+    }    
+  }
+
+  function convertShidoToYuko(fighter) {
+    if (fight_state.points[fighter]["shido"] == 1) {
+      fight_state.points[fighter]["shido"] === 1;
+      fight_state.points[fighter]["yuko"] += 1;
+    }
+  }
+
+  function convertWazariToIppon(fighter) {
+    if (fight_state.points[fighter]["wazari"] == 2) {
+      fight_state.points[fighter]["wazari"] == 2;
+      fight_state.points[fighter]["ippon"]++;
+    }
+  }
+
+  // function convertYukoToWazari(fighter) {
+  //   const yukoPoints = fight_state.points[fighter]["yuko"];
+  //   const conversionPoints = [10, 20];
+  
+  //   if (conversionPoints.includes(yukoPoints)) {
+  //     fight_state.points[fighter]["wazari"]++;
+  //   }
+  // }  
+
+  // function convertYukoToWazari(fighter) {
+  //   const yukoPoints = fight_state.points[fighter]["yuko"];
+  //   const conversionPoints = [10, 20];
+  
+  //   // Verifica se o número de Yukos está em um dos pontos de conversão
+  //   if (conversionPoints.includes(yukoPoints)) {
+  //     // Verifica se o Wazari já foi incrementado para esse ponto de Yuko
+  //     if (!fight_state.points[fighter]["yuko_converted"]) {
+  //       fight_state.points[fighter]["wazari"]++;
+  //       fight_state.points[fighter]["yuko_converted"] = true;
+  //     }
+  //   } else {
+  //     // Reseta a flag se o número de Yukos não está em um ponto de conversão
+  //     fight_state.points[fighter]["yuko_converted"] = false;
+  //   }
+  // }
+
   function convertYukoToIppon(fighter) {
     if (fight_state.points[fighter]["yuko"] >= 100) {
       fight_state.points[fighter]["yuko"] -= 100;
@@ -227,39 +277,24 @@ function add_point(fighter, point_name) {
     }
   }
 
-  // 2 wazaris = 1 ippon
-  if (point_name === "wazari") {
-    //add_point(fighter, "wazari");
-    convertWazariToIppon(fighter);
-  }
-  // 100 yukos = 1 ippon
-  if (point_name === "yuko") {
-    //add_point(fighter, "yuko");
-    convertYukoToIppon(fighter);
-  }
-
-  // ippon stop?
   const n_ippons = get_n_ippons(fighter);
   const ippon_stop =
     n_ippons_before != n_ippons &&
     fight_rules.stop_clock_on_ippon != null &&
     n_ippons % fight_rules.stop_clock_on_ippon == 0;
 
-  // wazari stop?
   const n_wazaris = fight_state.points[fighter]["wazari"];
   const wazari_stop =
     n_wazaris_before != n_wazaris &&
     fight_rules.stop_clock_on_wazari != null &&
     n_wazaris % fight_rules.stop_clock_on_wazari == 0;
 
-  // yuko stop?
   const n_yukos = fight_state.points[fighter]["yuko"];
   const yuko_stop =
     n_yukos_before != n_yukos &&
     fight_rules.stop_clock_on_yuko != null &&
     n_yukos % fight_rules.stop_clock_on_yuko == 0;
 
-  // shido stop?
   const n_shidos = fight_state.points[fighter]["shido"];
   const shido_stop =
     n_shidos_before != n_shidos &&
@@ -271,19 +306,16 @@ function add_point(fighter, point_name) {
     matte();
   }
 
-  // ippon osaekomi stop?
   const ippon_osaekomi_stop =
     n_ippons_before != n_ippons &&
     fight_rules.stop_osaekomi_on_ippon != null &&
     n_ippons % fight_rules.stop_osaekomi_on_ippon == 0;
 
-  // wazari osaekomi stop?
   const wazari_osaekomi_stop =
     n_wazaris_before != n_wazaris &&
     fight_rules.stop_osaekomi_on_wazari != null &&
     n_wazaris % fight_rules.stop_osaekomi_on_wazari == 0;
 
-  // yuko osaekomi stop?
   const yuko_osaekomi_stop =
     n_yukos_before != n_yukos &&
     fight_rules.stop_osaekomi_on_yuko != null &&
@@ -293,7 +325,166 @@ function add_point(fighter, point_name) {
     ring_bell();
     fight_state.osaekomi_running = false;
   }
+
+  // Atualiza o display após a alteração dos pontos
+  update_display(fighter, point_name);
 }
+
+function update_display(fighter, point_name) {
+  document.getElementById(`point_${fighter}_${point_name}`).innerText = fight_state.points[fighter][point_name];
+} 
+
+// function add_point(fighter, point_name) {
+//   const n_ippons_before = get_n_ippons(fighter);
+//   const n_wazaris_before = fight_state.points[fighter]["wazari"];
+//   const n_yukos_before = fight_state.points[fighter]["yuko"];
+//   const n_shidos_before = fight_state.points[fighter]["shido"];
+  
+//   console.log("Antes:", fight_state.points[fighter][point_name]);
+//   if(fight_state.points === 0){
+//     n_shidos_before = fight_state.points = 0;
+//   }else{
+//   fight_state.points[fighter][point_name] += 1;
+//   }
+//   console.log("Depois:", fight_state.points[fighter][point_name]);
+
+//   convertWazariToIppon(fighter);
+//   convertYukoToIppon(fighter);
+//   convertShidoToIppon(fighter);
+//   convertShidoToWazari(fighter);
+//   convertShidoToYuko(fighter);
+
+//   // 3 shidos = 1 ippon
+//   function convertShidoToIppon(fighter) {
+//     if (fight_state.points[fighter]["shido"] >= 3) {
+//       fight_state.points[fighter]["shido"] -= 3;
+//       fight_state.points[fighter]["shido"]++;
+//       fight_state.points[fighter]["ippon"]++;
+//       // fight_state.points[fighter]["wazari"] == 0 ;
+//     }
+//   }
+
+//   // 2 shidos = 1 wazari
+//   function convertShidoToWazari(fighter) {
+//     if (fight_state.points[fighter]["shido"] >= 2) {
+//       fight_state.points[fighter]["shido"] -= 2;
+//       fight_state.points[fighter]["shido"]++;
+//       fight_state.points[fighter]["wazari"]++;
+//     }    
+//   }
+
+//   // 1 shido = 1 yuko
+//   function convertShidoToYuko(fighter) {
+//     if (fight_state.points[fighter]["shido"] == 1) {
+//       fight_state.points[fighter]["shido"] -= 1;
+//       fight_state.points[fighter]["shido"]++;
+//       fight_state.points[fighter]["yuko"] += 1;
+//     }
+//   }
+
+//   // 2 wazaris = 1 ippon
+//   function convertWazariToIppon(fighter) {
+//     if (fight_state.points[fighter]["wazari"] >= 2) {
+//       fight_state.points[fighter]["wazari"] -= 2;
+//       fight_state.points[fighter]["ippon"]++;
+//       fight_state.points[fighter]["wazari"] = 0;
+//     }
+//   }
+
+//   // 100 yukos = 1 ippon
+//   function convertYukoToIppon(fighter) {
+//     if (fight_state.points[fighter]["yuko"] >= 100) {
+//       fight_state.points[fighter]["yuko"] -= 100;
+//       fight_state.points[fighter]["ippon"]++;
+//     }
+//   }
+
+//   // 2 wazaris = 1 ippon
+//   if (point_name === "wazari") {
+//     //add_point(fighter, "wazari");
+//     convertWazariToIppon(fighter);
+//   }
+
+//   // 100 yukos = 1 ippon
+//   if (point_name === "yuko") {
+//     //add_point(fighter, "yuko");
+//     convertYukoToIppon(fighter);
+//   }
+
+//   // 3 shidos = 1 ippon
+//   if (point_name === "shido") {
+//     //add_point(fighter, "shido");
+//     //convertShidoToIppon(fighter);
+//   }
+
+//   // 2 shidos = 1 wazari
+//   if (point_name === "shido") {
+//     //add_point(fighter, "shido");
+//     //convertShidoToWazari(fighter);
+//   }
+  
+//   // 1 shido = 1 yuko
+//   if (point_name === "shido") {
+//     //add_point(fighter, "shido");
+//     //convertShidoToYuko(fighter);    
+//   }
+
+//   // ippon stop?
+//   const n_ippons = get_n_ippons(fighter);
+//   const ippon_stop =
+//     n_ippons_before != n_ippons &&
+//     fight_rules.stop_clock_on_ippon != null &&
+//     n_ippons % fight_rules.stop_clock_on_ippon == 0;
+
+//   // wazari stop?
+//   const n_wazaris = fight_state.points[fighter]["wazari"];
+//   const wazari_stop =
+//     n_wazaris_before != n_wazaris &&
+//     fight_rules.stop_clock_on_wazari != null &&
+//     n_wazaris % fight_rules.stop_clock_on_wazari == 0;
+
+//   // yuko stop?
+//   const n_yukos = fight_state.points[fighter]["yuko"];
+//   const yuko_stop =
+//     n_yukos_before != n_yukos &&
+//     fight_rules.stop_clock_on_yuko != null &&
+//     n_yukos % fight_rules.stop_clock_on_yuko == 0;
+
+//   // shido stop?
+//   const n_shidos = fight_state.points[fighter]["shido"];
+//   const shido_stop =
+//     n_shidos_before != n_shidos &&
+//     fight_rules.stop_clock_on_shido != null &&
+//     n_shidos % fight_rules.stop_clock_on_shido == 0;
+
+//   if (ippon_stop || wazari_stop || yuko_stop || shido_stop) {
+//     ring_bell();
+//     matte();
+//   }
+
+//   // ippon osaekomi stop?
+//   const ippon_osaekomi_stop =
+//     n_ippons_before != n_ippons &&
+//     fight_rules.stop_osaekomi_on_ippon != null &&
+//     n_ippons % fight_rules.stop_osaekomi_on_ippon == 0;
+
+//   // wazari osaekomi stop?
+//   const wazari_osaekomi_stop =
+//     n_wazaris_before != n_wazaris &&
+//     fight_rules.stop_osaekomi_on_wazari != null &&
+//     n_wazaris % fight_rules.stop_osaekomi_on_wazari == 0;
+
+//   // yuko osaekomi stop?
+//   const yuko_osaekomi_stop =
+//     n_yukos_before != n_yukos &&
+//     fight_rules.stop_osaekomi_on_yuko != null &&
+//     n_yukos % fight_rules.stop_osaekomi_on_yuko == 0;
+
+//   if (ippon_osaekomi_stop || wazari_osaekomi_stop || yuko_osaekomi_stop) {
+//     ring_bell();
+//     fight_state.osaekomi_running = false;
+//   }
+// }
 /**
  *
  * @param {*} fighter
@@ -804,11 +995,11 @@ function scroll_down() {
   element.scrollIntoView({ behavior: "smooth" });
 }
 
-// hide button once we are scrolling
-const scroll_down_button = document.getElementById("scroll_down");
-window.addEventListener("scroll", () => {
-  scroll_down_button.style.display = "none";
-});
+// // hide button once we are scrolling
+// const scroll_down_button = document.getElementById("scroll_down");
+// window.addEventListener("scroll", () => {
+//   scroll_down_button.style.display = "none";
+// });
 
 //////////
 // KEYS //
