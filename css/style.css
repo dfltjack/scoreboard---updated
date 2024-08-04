@@ -128,15 +128,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   }
 }
 
-#enable_view_only {
-  /* switch from editable to view-only */
-  /* put in corner */
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 999; /* put element in front */
-}
-
 #scroll_down {
   /* put in corner */
   position: fixed;
@@ -213,7 +204,15 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
     width: 100%;
     max-width: 500px; /* Ajuste conforme necessário */
 }
-  .dropdown-menu img {
+.dropdown-menu img {
     width: 20px; /* Ajuste conforme necessário */
     margin-right: 10px;
+}
+#enable_view_only {
+  /* switch from editable to view-only */
+  /* put in corner */
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 999; /* put element in front */
 }

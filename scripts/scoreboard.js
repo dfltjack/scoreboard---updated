@@ -202,11 +202,11 @@ function add_point(fighter, point_name) {
   const n_wazaris_before = fight_state.points[fighter]["wazari"];
   const n_yukos_before = fight_state.points[fighter]["yuko"];
   const n_shidos_before = fight_state.points[fighter]["shido"];
-  
+
   console.log("Antes:", fight_state.points[fighter][point_name]);
-  
+
   fight_state.points[fighter][point_name] += 1;
-  
+
   console.log("Depois:", fight_state.points[fighter][point_name]);
 
   convertShidoToYuko(fighter);
@@ -227,7 +227,7 @@ function add_point(fighter, point_name) {
     if (fight_state.points[fighter]["shido"] >= 2) {
       fight_state.points[fighter]["shido"] === 2;
       fight_state.points[fighter]["wazari"]++;
-    }    
+    }
   }
 
   function convertShidoToYuko(fighter) {
@@ -247,16 +247,16 @@ function add_point(fighter, point_name) {
   // function convertYukoToWazari(fighter) {
   //   const yukoPoints = fight_state.points[fighter]["yuko"];
   //   const conversionPoints = [10, 20];
-  
+
   //   if (conversionPoints.includes(yukoPoints)) {
   //     fight_state.points[fighter]["wazari"]++;
   //   }
-  // }  
+  // }
 
   // function convertYukoToWazari(fighter) {
   //   const yukoPoints = fight_state.points[fighter]["yuko"];
   //   const conversionPoints = [10, 20];
-  
+
   //   // Verifica se o número de Yukos está em um dos pontos de conversão
   //   if (conversionPoints.includes(yukoPoints)) {
   //     // Verifica se o Wazari já foi incrementado para esse ponto de Yuko
@@ -331,15 +331,16 @@ function add_point(fighter, point_name) {
 }
 
 function update_display(fighter, point_name) {
-  document.getElementById(`point_${fighter}_${point_name}`).innerText = fight_state.points[fighter][point_name];
-} 
+  document.getElementById(`point_${fighter}_${point_name}`).innerText =
+    fight_state.points[fighter][point_name];
+}
 
 // function add_point(fighter, point_name) {
 //   const n_ippons_before = get_n_ippons(fighter);
 //   const n_wazaris_before = fight_state.points[fighter]["wazari"];
 //   const n_yukos_before = fight_state.points[fighter]["yuko"];
 //   const n_shidos_before = fight_state.points[fighter]["shido"];
-  
+
 //   console.log("Antes:", fight_state.points[fighter][point_name]);
 //   if(fight_state.points === 0){
 //     n_shidos_before = fight_state.points = 0;
@@ -370,7 +371,7 @@ function update_display(fighter, point_name) {
 //       fight_state.points[fighter]["shido"] -= 2;
 //       fight_state.points[fighter]["shido"]++;
 //       fight_state.points[fighter]["wazari"]++;
-//     }    
+//     }
 //   }
 
 //   // 1 shido = 1 yuko
@@ -422,11 +423,11 @@ function update_display(fighter, point_name) {
 //     //add_point(fighter, "shido");
 //     //convertShidoToWazari(fighter);
 //   }
-  
+
 //   // 1 shido = 1 yuko
 //   if (point_name === "shido") {
 //     //add_point(fighter, "shido");
-//     //convertShidoToYuko(fighter);    
+//     //convertShidoToYuko(fighter);
 //   }
 
 //   // ippon stop?
@@ -990,6 +991,61 @@ function display_view_only() {
   window.scrollTo(0, 0);
 }
 
+/**
+ * Lógica para implementar o clube na página de exibição
+ */
+function saveClub() {
+  const clubInput = document.getElementById("fighter_0_club").value;
+  localStorage.setItem("club", clubInput);
+  displayClub();
+}
+
+function displayClub() {
+  const club = localStorage.getItem('club');
+  const clubDisplayElement = document.getElementById('club-display');
+ 
+  if (clubDisplayElement) {
+      if (club) {
+          clubDisplayElement.innerText = `Clube: ${club}`;  
+          clubDisplayElement.removeAttribute('hidden');        
+      } else {
+          clubDisplayElement.innerText = 'Nenhum clube encontrado.';
+      }
+  }
+}
+// function displayClub() {
+//   const club = localStorage.getItem("club");
+//   if (club) {
+//     document.getElementById("club-display").innerText = `Clube: ${club}`;
+//   } else {
+//     document.getElementById("club-display").innerText =
+//       "Nenhum clube encontrado.";
+//   }
+// }
+        
+
+/**
+ * Lógica para implementar o Nome do Judoca na página de exibição
+ */
+function saveNome() {
+  const nomeInput = document.getElementById("fighter_0_name").value;
+  localStorage.setItem("nome", nomeInput);
+  displayNome();
+}
+
+function displayNome() {
+  const nome = localStorage.getItem('nome');
+  const nomeDisplayElement = document.getElementById('nome-display'); 
+  if (nomeDisplayElement) {
+      if (nome) {
+        nomeDisplayElement.innerText = `Nome: ${nome}`;
+        nomeDisplayElement.removeAttribute('hidden');
+      } else {
+        nomeDisplayElement.innerText = 'Nenhum nome encontrado.';
+      }
+  }
+}
+
 function scroll_down() {
   const element = document.getElementById("usage");
   element.scrollIntoView({ behavior: "smooth" });
@@ -1109,7 +1165,7 @@ function register_keys() {
       ignore = true;
     }
 
-    if(event.keyCode == 71 && golden_score_time_set_change){
+    if (event.keyCode == 71 && golden_score_time_set_change) {
       reset_for_golden_score();
       ignore = true;
     }

@@ -26,7 +26,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
     <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/flag-icon.min.css">
-    <title>Country Selector</title>    
+    <title>Country Selector</title>
     <!-- Flag Icon CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet">
 </head>
@@ -41,41 +41,43 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
                         <tbody>
                             <tr>
                                 <td>
-                                    <div class="container mt-6" >
+                                    <div class="container mt-6">
                                         <div class="row mb-6">
-                                            <div class="col-md-12">
-                                                 <div class="input-group">
-                                                    <span class="input-group-text" id="tori-label" style="align-items: center;">Tori</span>
-                                                    <input 
-                                                        type="text" id="fighter_0_name"
-                                                        class=" form-control-lg large-input"
-                                                        placeholder="Tori" 
-                                                        aria-label="Tori"
-                                                        aria-describedby="tori-label" 
-                                                        data-bs-toggle="tooltip"
-                                                        data-bs-placement="top" 
-                                                        data-bs-title="Tori"
-                                                        style="width: 200px; max-width: 500px;"
-                                                    >
-                                                </div>
-                                            </div>
-                                            <br>
-                                            <div class="col-md-12">
+                                            <div class="col-md-12 optional">
                                                 <div class="input-group">
-                                                    <span class="input-group-text" id="club-label">Clube</span>
-                                                    <input 
-                                                        type="text" id="fighter_0_club"
-                                                        class="form-control form-control-lg large-input"
-                                                        placeholder="Club" 
-                                                        aria-label="Club"
-                                                        aria-describedby="club-label" 
-                                                        data-bs-toggle="tooltip"
-                                                        data-bs-placement="top" 
-                                                        data-bs-title="Club"
-                                                        style="width: 200px; max-width: 500px;"
-                                                    >
+                                                    <!-- <span class=" lh-1 input-group-text" id="Judoca-label"                                                      >Judoca</span> -->
+                                                    <input onchange="saveNome()" type="text" id="fighter_0_name"
+                                                        class=" form-control-lg large-input" 
+                                                        placeholder="Nome do Judoca"
+                                                        aria-label="Judoca" aria-describedby="Judoca-label"
+                                                        data-bs-toggle="tooltip" data-bs-placement="top"
+                                                        data-bs-title="Judoca" style="width: 200px; max-width: 500px;">
                                                 </div>
                                             </div>
+
+                                            <br>
+
+                                            <div onchange="displayNome()" id="nome-display" style="font-size: 1.5rem;" hidden></div>
+                                            
+                                            <br>
+                                            <br>
+                                            
+                                            <div class="col-md-12 optional">
+                                                <div class="input-group">
+                                                    <!-- <span class="lh-1 input-group-text" id="club-label">Clube</span> -->
+                                                    <input onchange="saveClub()" type="text" id="fighter_0_club"
+                                                        class="form-control form-control-lg large-input"
+                                                        placeholder="Nome do Clube" aria-label="Club"
+                                                        aria-describedby="club-label" data-bs-toggle="tooltip"
+                                                        data-bs-placement="top" data-bs-title="Club"
+                                                        style="width: 200px; max-width: 500px;">
+                                                </div>
+                                            </div>
+
+                                            <br>
+                                            
+                                            <div id="club-display" style="font-size: 1.5rem;" hidden></div>
+
                                         </div>
                                     </div>
                                     <br>
@@ -86,13 +88,16 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
                                                 Selecione um país
                                             </button>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                <li><a class="dropdown-item flag-select" href="#" data-value="us"><img
+                                                <li><a class="dropdown-item flag-select optional" href="#"
+                                                        data-value="us"><img
                                                             src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/flags/4x3/us.svg"
                                                             alt="US Flag"> Estados Unidos</a></li>
-                                                <li><a class="dropdown-item flag-select" href="#" data-value="br"><img
+                                                <li><a class="dropdown-item flag-select optional" href="#"
+                                                        data-value="br"><img
                                                             src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/flags/4x3/br.svg"
                                                             alt="Brazil Flag"> Brasil</a></li>
-                                                <li><a class="dropdown-item flag-select" href="#" data-value="jp"><img
+                                                <li><a class="dropdown-item flag-select optional" href="#"
+                                                        data-value="jp"><img
                                                             src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/flags/4x3/jp.svg"
                                                             alt="Japan Flag"> Japão</a></li>
                                                 <!-- Adicione mais opções conforme necessário -->
@@ -169,39 +174,29 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
                         <tbody>
                             <tr>
                                 <td>
-                                    <div class="container mt-6" >
+                                    <div class="container mt-6">
                                         <div class="row mb-6">
                                             <div class="col-md-12">
-                                                 <div class="input-group">
-                                                    <span class="input-group-text" id="tori-label" style="align-items: center;">Tori</span>
-                                                    <input 
-                                                        type="text" id="fighter_0_name"
-                                                        class=" form-control-lg large-input"
-                                                        placeholder="Tori" 
-                                                        aria-label="Tori"
-                                                        aria-describedby="tori-label" 
-                                                        data-bs-toggle="tooltip"
-                                                        data-bs-placement="top" 
-                                                        data-bs-title="Tori"
-                                                        style="width: 200px; max-width: 500px;"
-                                                    >
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="Judoca-label"
+                                                        style="align-items: center;">Judoca</span>
+                                                    <input type="text" id="fighter_0_name"
+                                                        class=" form-control-lg large-input" placeholder="Judoca"
+                                                        aria-label="Judoca" aria-describedby="Judoca-label"
+                                                        data-bs-toggle="tooltip" data-bs-placement="top"
+                                                        data-bs-title="Judoca" style="width: 200px; max-width: 500px;">
                                                 </div>
                                             </div>
                                             <br>
                                             <div class="col-md-12">
                                                 <div class="input-group">
-                                                    <span class="input-group-text" id="club-label">Clube</span>
-                                                    <input 
-                                                        type="text" id="fighter_0_club"
+                                                    <span class="input-group-text" id="club-label"></span>
+                                                    <input type="text" id="fighter_0_club"
                                                         class="form-control form-control-lg large-input"
-                                                        placeholder="Club" 
-                                                        aria-label="Club"
-                                                        aria-describedby="club-label" 
-                                                        data-bs-toggle="tooltip"
-                                                        data-bs-placement="top" 
-                                                        data-bs-title="Club"
-                                                        style="width: 200px; max-width: 500px;"
-                                                    >
+                                                        placeholder="Club" aria-label="Club"
+                                                        aria-describedby="club-label" data-bs-toggle="tooltip"
+                                                        data-bs-placement="top" data-bs-title="club"
+                                                        style="width: 200px; max-width: 500px;">
                                                 </div>
                                             </div>
                                         </div>
@@ -454,7 +449,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
                                                 </button>
                                                 <span id="osaekomi_assign_text" class="input-group-text"
                                                     style="background-color: transparent; color: white; border: 0px solid transparent; width: 20%; justify-content: center;">««
-                                                    Tori ? »»</span>
+                                                    Judoca ? »»</span>
                                                 <button class="btn btn-primary" type="button" id="osaekomi_assign_1"
                                                     onclick="osaekomi_assign(1);" style="width: 20%"
                                                     data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -473,31 +468,28 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
         </tbody>
     </table>
 
-    <a type="button" class="btn btn-secondary btn-floating optional" id="enable_view_only" href="#view" target="_blank"
-        rel="noopener noreferrer">
-        <i class="fas fa-eye"></i>
-    </a>
-
-    <!-- <a type="button" class="btn btn-secondary btn-floating optional" id="scroll_down" onclick="scroll_down()">
-		<i class="fas fa-arrow-down"></i>
-    </a> -->
-
     <br>
 
     <div class="container md md-12">
         <div class="form-group md md-6">
+            <a type="button" class="btn btn-primary md md-6" id="manual" href="#view" target="_blank"
+                rel="noopener noreferrer">
+                <i class="fight">Modo de Exibição</i>
+            </a>
             <a type="button" class="btn btn-primary md md-6" id="manual" href="./manual.html">
                 <i class="fight">Manual do Usuário</i>
             </a>
             <button class="btn btn-primary md md-6"
                 onclick="set_fight_rules(); reset_all(); window.scrollTo({ top: 0, behavior: 'smooth' });">Update and
-                Reset</button>
+                Reset
+            </button>
         </div>
         <div class="form-group md md-6">
             <textarea class="form-control" id="fight_rules" name="fight_rules" rows="10"
                 cols="50">Not loaded...</textarea>
         </div>
     </div>
+
 
     <!-- Bootstrap JS and Popper.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
@@ -515,27 +507,19 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
             });
         });
     </script> -->
-    
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-          var dropdownItems = document.querySelectorAll('.dropdown-item');
-          dropdownItems.forEach(function (item) {
-            item.addEventListener('click', function (event) {
-              event.preventDefault();
-              var selectedValue = this.getAttribute('data-value');
-              var dropdownMenuButton = this.closest('.dropdown').querySelector('.dropdown-toggle');
-              dropdownMenuButton.innerHTML = this.innerHTML;
-              dropdownMenuButton.setAttribute('data-selected-value', selectedValue);
+            var dropdownItems = document.querySelectorAll('.dropdown-item');
+            dropdownItems.forEach(function (item) {
+                item.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    var selectedValue = this.getAttribute('data-value');
+                    var dropdownMenuButton = this.closest('.dropdown').querySelector('.dropdown-toggle');
+                    dropdownMenuButton.innerHTML = this.innerHTML;
+                    dropdownMenuButton.setAttribute('data-selected-value', selectedValue);
+                });
             });
-          });
-        });
-      </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl)
-            })
         });
     </script>
     <script>
@@ -547,7 +531,19 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
         });
     </script>
 
-    <!-- RESOURCES -->
+    <!--trying to put the Club Name at the view-only-page-->
+    <script>       
+        document.addEventListener('DOMContentLoaded', function () {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            });
+
+            displayClub();
+            displayNome();
+        });
+    </script>
+    
 
     <div id="audio">
         <audio id="audio_bell" src="./audio/bell.mp3"></audio>
